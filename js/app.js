@@ -88,14 +88,16 @@ function initEnvelope() {
     if (opened) return;
     opened = true;
     if (hint) {
-      hint.style.transition = "opacity 0.35s ease";
+      hint.style.transition = "opacity 0.3s ease, transform 0.3s ease";
       hint.style.opacity = "0";
+      hint.style.transform = "translateY(-6px)";
+      hint.setAttribute("aria-hidden", "true");
     }
     envelope.classList.add("is-opening");
 
-    await wait(1550);
+    await wait(1900);
     envelope.classList.add("is-opened");
-    await wait(420);
+    await wait(480);
     goTo("welcome");
   }
 

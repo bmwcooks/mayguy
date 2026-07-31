@@ -289,6 +289,21 @@ button {
   margin-top: 0.35rem;
 }
 
+/* Solid ink-on-paper control for the coupon */
+.btn--coupon {
+  width: 100%;
+  margin-top: 0.5rem;
+  background: linear-gradient(180deg, #2a241c 0%, #1a1612 100%);
+  color: #f3eee4;
+  box-shadow: 0 6px 18px rgba(42, 36, 28, 0.22);
+  position: relative;
+  z-index: 1;
+}
+
+.btn--coupon:active {
+  transform: scale(0.97);
+}
+
 .btn--ghost {
   color: var(--moon-soft);
   background: transparent;
@@ -342,6 +357,15 @@ button {
   width: 100%;
   max-width: 20rem;
   perspective: 900px;
+  /* Room for the letter to rise fully above the envelope */
+  padding-top: 7.5rem;
+  margin-top: -2rem;
+}
+
+.envelope.is-opening {
+  pointer-events: none;
+  /* Drop filter while open so the rising letter isn't constrained */
+  filter: none;
 }
 
 .envelope-hint {
@@ -366,15 +390,11 @@ button {
   transform-style: preserve-3d;
   perspective: 900px;
   filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.45));
-  transition: transform 0.4s var(--ease-spring);
+  transition: transform 0.4s var(--ease-spring), filter 0.3s ease;
 }
 
 .envelope:active {
   transform: scale(0.985);
-}
-
-.envelope.is-opening {
-  pointer-events: none;
 }
 
 .envelope__pocket {
@@ -383,7 +403,7 @@ button {
   background:
     linear-gradient(160deg, var(--envelope-flap) 0%, var(--envelope) 55%, var(--envelope-deep) 100%);
   border-radius: 0.35rem 0.35rem 0.55rem 0.55rem;
-  overflow: hidden;
+  z-index: 1;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
     inset 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -398,6 +418,70 @@ button {
   pointer-events: none;
 }
 
+/* Clips the letter while sealed; opens so the letter can rise fully into view */
+.envelope__well {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 2;
+  border-radius: 0.35rem 0.35rem 0.55rem 0.55rem;
+  pointer-events: none;
+}
+
+.envelope.is-opening .envelope__well {
+  overflow: visible;
+  z-index: 8;
+}
+
+/* Front panel hides the tucked letter until the flap opens */
+.envelope__front {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 68%;
+  z-index: 3;
+  border-radius: 0 0 0.55rem 0.55rem;
+  background:
+    linear-gradient(160deg, var(--envelope) 0%, var(--envelope-deep) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 -6px 14px rgba(0, 0, 0, 0.18);
+}
+
+.envelope__front::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+}
+
+/* Letter starts fully tucked behind the front panel */
+.envelope__letter {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 6%;
+  height: auto;
+  min-height: 94%;
+  background:
+    linear-gradient(180deg, #f7f2e9 0%, var(--paper) 100%);
+  border-radius: 0.25rem;
+  transform: translateY(42%);
+  transition:
+    transform 1.15s var(--ease-out) 0.38s,
+    box-shadow 0.6s var(--ease-soft) 0.38s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.15rem 1.1rem 1.25rem;
+}
+
 .envelope__flap {
   position: absolute;
   left: 0;
@@ -408,7 +492,7 @@ button {
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top center;
   transform: rotateX(0deg);
-  z-index: 3;
+  z-index: 4;
   transition: transform 0.95s var(--ease-out);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   backface-visibility: hidden;
@@ -420,29 +504,15 @@ button {
   z-index: 1;
 }
 
-.envelope__letter {
-  position: absolute;
-  left: 7%;
-  right: 7%;
-  top: 12%;
-  height: 88%;
-  background:
-    linear-gradient(180deg, #f7f2e9 0%, var(--paper) 100%);
-  border-radius: 0.2rem;
+.envelope.is-opening .envelope__front {
   z-index: 2;
-  transform: translateY(18%);
-  transition: transform 1.05s var(--ease-out) 0.4s;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  color: var(--ink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 1.1rem;
 }
 
 .envelope.is-opening .envelope__letter {
-  transform: translateY(-72%);
-  z-index: 5;
+  transform: translateY(-132%);
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.38),
+    0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .letter-content {
@@ -493,7 +563,7 @@ button {
   border-radius: 50%;
   background:
     radial-gradient(circle at 35% 30%, #a54d5c, var(--seal) 60%, #6e2c38);
-  z-index: 4;
+  z-index: 5;
   display: grid;
   place-items: center;
   box-shadow:
@@ -1194,8 +1264,10 @@ button {
   align-items: center;
   gap: 0.85rem;
   text-align: center;
-  max-width: 18rem;
-  min-height: 6rem;
+  max-width: 20rem;
+  width: 100%;
+  min-height: 7rem;
+  padding: 0 0.5rem;
 }
 
 .goodbye-line {
@@ -1215,9 +1287,12 @@ button {
 
 .goodbye-line--name {
   font-family: var(--font-hand);
-  font-size: 1.6rem;
+  font-size: clamp(1.2rem, 4.8vw, 1.5rem);
   color: var(--gold-soft);
   margin-top: 0.35rem;
+  line-height: 1.4;
+  max-width: 100%;
+  text-wrap: balance;
 }
 
 .goodbye-line .cursor {
