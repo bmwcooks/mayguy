@@ -20,6 +20,9 @@ export function initScrapbook({ onComplete }) {
   let dragging = false;
   let lockedAxis = null; // 'x' | 'y'
   let width = 0;
+  let lastX = 0;
+  let lastT = 0;
+  let velocity = 0;
 
   function build() {
     track.innerHTML = MEMORIES.map((m, i) => {
@@ -36,9 +39,10 @@ export function initScrapbook({ onComplete }) {
               <img
                 src="${m.image}"
                 alt=""
-                loading="${i === 0 ? "eager" : "lazy"}"
+                loading="${i < 2 ? "eager" : "lazy"}"
                 decoding="async"
                 draggable="false"
+                style="object-position: ${m.focus || "50% 40%"}"
               />
             </div>
             <p class="page-story">${escapeHtml(m.story)}</p>
@@ -101,15 +105,30 @@ export function initScrapbook({ onComplete }) {
     lockedAxis = null;
     startX = e.clientX;
     startY = e.clientY;
+    lastX = e.clientX;
+    lastT = performance.now();
+    velocity = 0;
     deltaX = 0;
     track.classList.add("is-dragging");
-    scrapbook.setPointerCapture?.(e.pointerId);
+    try {
+      scrapbook.setPointerCapture?.(e.pointerId);
+    } catch {
+      /* ignore */
+    }
   }
 
   function onPointerMove(e) {
     if (!dragging) return;
     const dx = e.clientX - startX;
     const dy = e.clientY - startY;
+    const now = performance.now();
+    const dt = now - lastT;
+
+    if (dt > 0) {
+      velocity = (e.clientX - lastX) / dt;
+      lastX = e.clientX;
+      lastT = now;
+    }
 
     if (!lockedAxis) {
       if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
@@ -117,12 +136,10 @@ export function initScrapbook({ onComplete }) {
     }
 
     if (lockedAxis === "y") {
-      // allow vertical scroll intent — cancel horizontal drag
       return;
     }
 
     e.preventDefault();
-    // rubber-band at edges
     const atStart = index === 0 && dx > 0;
     const atEnd = index === MEMORIES.length - 1 && dx < 0;
     deltaX = atStart || atEnd ? dx * 0.28 : dx;
@@ -131,19 +148,21 @@ export function initScrapbook({ onComplete }) {
 
   function onPointerUp() {
     if (!dragging) return;
-    const threshold = width * 0.18;
+    const threshold = width * 0.16;
+    const flick = Math.abs(velocity) > 0.45;
     const dx = deltaX;
     dragging = false;
     track.classList.remove("is-dragging");
 
     if (lockedAxis === "x") {
-      if (dx < -threshold) goTo(index + 1);
-      else if (dx > threshold) goTo(index - 1);
+      if (dx < -threshold || (flick && velocity < -0.45)) goTo(index + 1);
+      else if (dx > threshold || (flick && velocity > 0.45)) goTo(index - 1);
       else goTo(index);
     } else {
       goTo(index);
     }
     lockedAxis = null;
+    velocity = 0;
   }
 
   function onKey(e) {
