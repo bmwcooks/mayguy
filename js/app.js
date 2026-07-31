@@ -3,6 +3,7 @@
 import { initStars } from "./stars.js";
 import { initScrapbook } from "./scrapbook.js";
 import { initLocks, playGiftOpen, initCouponCopy } from "./gift.js";
+import { renderGarden } from "./flowers.js";
 import { GOODBYE_LINES, MEMORIES } from "./data.js";
 
 const SCREENS = {
@@ -16,6 +17,9 @@ const SCREENS = {
   "gift-box": "screen-gift-box",
   "gift-reveal": "screen-gift-reveal",
   goodbye: "screen-goodbye",
+  "flowers-tease": "screen-flowers-tease",
+  "flowers-note": "screen-flowers-note",
+  "flowers-garden": "screen-flowers-garden",
 };
 
 let current = "envelope";
@@ -61,6 +65,9 @@ async function goTo(next, { delay = 0 } = {}) {
     });
   }
   if (next === "goodbye") runGoodbye();
+  if (next === "flowers-garden") {
+    renderGarden(document.getElementById("flower-garden"));
+  }
 }
 
 function wait(ms) {
@@ -113,9 +120,11 @@ function initEnvelope() {
 /* ---------- Typewriter goodbye ---------- */
 async function runGoodbye() {
   const ids = ["goodbye-line-1", "goodbye-line-2", "goodbye-line-3"];
+  const continueBtn = document.getElementById("goodbye-continue");
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Soft pause so the night sky settles first
+  if (continueBtn) continueBtn.hidden = true;
+
   await wait(reduced ? 200 : 700);
 
   for (let i = 0; i < GOODBYE_LINES.length; i++) {
@@ -123,6 +132,12 @@ async function runGoodbye() {
     if (!el) continue;
     await typeLine(el, GOODBYE_LINES[i], reduced ? 0 : 42);
     await wait(reduced ? 80 : i === 0 ? 620 : 420);
+  }
+
+  await wait(reduced ? 200 : 900);
+  if (continueBtn) {
+    continueBtn.hidden = false;
+    continueBtn.classList.add("fade-up");
   }
 }
 
@@ -169,11 +184,15 @@ document.querySelectorAll("[data-next]").forEach((btn) => {
   });
 });
 
+document.getElementById("goodbye-continue")?.addEventListener("click", () => {
+  goTo("flowers-tease");
+});
+
 // Quiet the iOS rubber-band without blocking interactive regions
 document.addEventListener(
   "touchmove",
   (e) => {
-    if (e.target.closest(".scrapbook, .lock-form, #screen-gift-lock-1, #screen-gift-lock-2")) {
+    if (e.target.closest(".scrapbook, .lock-form, #screen-gift-lock-1, #screen-gift-lock-2, .garden")) {
       return;
     }
     if (e.touches.length === 1) {

@@ -374,6 +374,14 @@ button {
   text-transform: uppercase;
   color: var(--moon-muted);
   animation: softPulse 2.8s var(--ease-soft) infinite;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.envelope-stage:has(.envelope.is-opening) .envelope-hint,
+.envelope-stage:has(.envelope.is-opened) .envelope-hint {
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
 }
 
 @keyframes softPulse {
@@ -439,24 +447,13 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 68%;
+  height: 72%;
   z-index: 3;
   border-radius: 0 0 0.55rem 0.55rem;
   background:
-    linear-gradient(160deg, var(--envelope) 0%, var(--envelope-deep) 100%);
+    linear-gradient(175deg, #243356 0%, var(--envelope) 35%, var(--envelope-deep) 100%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.07),
-    0 -6px 14px rgba(0, 0, 0, 0.18);
-}
-
-.envelope__front::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 /* Letter starts fully tucked behind the front panel */
@@ -470,7 +467,7 @@ button {
   background:
     linear-gradient(180deg, #f7f2e9 0%, var(--paper) 100%);
   border-radius: 0.25rem;
-  transform: translateY(42%);
+  transform: translateY(55%);
   transition:
     transform 1.15s var(--ease-out) 0.38s,
     box-shadow 0.6s var(--ease-soft) 0.38s;
@@ -1310,6 +1307,164 @@ button {
   50%, 100% { opacity: 0; }
 }
 
+.goodbye-continue {
+  margin-top: 1.5rem;
+  animation: fadeUp 0.7s var(--ease-out) both;
+}
+
+/* =========================================================
+   Flowers epilogue
+   ========================================================= */
+.flowers-tease-text {
+  font-family: var(--font-hand);
+  font-size: clamp(1.6rem, 7vw, 2.1rem);
+  line-height: 1.3;
+  color: var(--moon);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.flowers-note {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  text-align: center;
+  color: var(--moon-soft);
+  font-size: 0.98rem;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.flowers-note__aside {
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  color: var(--gold-soft);
+  line-height: 1.35;
+}
+
+.screen--garden {
+  justify-content: flex-start;
+  padding-top: calc(1.25rem + var(--safe-top));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.garden-inner {
+  width: 100%;
+  max-width: 26rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.85rem;
+  padding-bottom: calc(1.5rem + var(--safe-bottom));
+}
+
+.garden-title {
+  margin-bottom: 0.35rem;
+}
+
+.garden {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.5rem 0.65rem;
+  width: 100%;
+  padding: 0.75rem 0 1.25rem;
+  position: relative;
+}
+
+.garden::before {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 0.5rem;
+  height: 4rem;
+  background: radial-gradient(ellipse at center, rgba(201, 184, 150, 0.12), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bloom {
+  flex: 0 0 auto;
+  width: calc(33.333% - 0.5rem);
+  max-width: 7.75rem;
+  min-width: 5.75rem;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(18px) scale(0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  position: relative;
+  z-index: 1;
+}
+
+.screen--active .bloom {
+  animation: bloomIn 0.9s var(--ease-out) forwards;
+  animation-delay: calc(0.35s + var(--bloom-delay, 0s));
+}
+
+@keyframes bloomIn {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.bloom-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+}
+
+.bloom-head {
+  transform-origin: 60px 52px;
+  animation: sway 4.5s var(--ease-soft) infinite;
+  animation-delay: var(--bloom-delay, 0s);
+}
+
+.bloom:nth-child(2) .bloom-head {
+  animation-duration: 5.1s;
+  animation-direction: reverse;
+}
+
+.bloom:nth-child(3) .bloom-head {
+  animation-duration: 4.2s;
+}
+
+.bloom:nth-child(4) .bloom-head {
+  animation-duration: 5.4s;
+  animation-direction: reverse;
+}
+
+.bloom:nth-child(5) .bloom-head {
+  animation-duration: 4.8s;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-2.5deg); }
+  50% { transform: rotate(2.5deg); }
+}
+
+.bloom-name {
+  font-family: var(--font-hand);
+  font-size: 1.05rem;
+  color: var(--moon-soft);
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 380px) {
+  .bloom {
+    width: calc(50% - 0.45rem);
+    max-width: 8rem;
+  }
+}
+
 /* =========================================================
    Reduced motion
    ========================================================= */
@@ -1329,6 +1484,10 @@ button {
   .envelope-hint {
     animation: none;
     opacity: 0.7;
+  }
+
+  .bloom-head {
+    animation: none !important;
   }
 }
 

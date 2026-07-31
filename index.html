@@ -230,6 +230,44 @@
         <p class="goodbye-line" id="goodbye-line-1"></p>
         <p class="goodbye-line goodbye-line--soft" id="goodbye-line-2"></p>
         <p class="goodbye-line goodbye-line--name" id="goodbye-line-3"></p>
+        <button type="button" class="btn btn--ghost goodbye-continue" id="goodbye-continue" hidden>
+          Continue
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ───────── Flowers tease ───────── -->
+    <section id="screen-flowers-tease" class="screen" aria-label="About the flowers" hidden>
+      <div class="screen-inner screen-inner--narrow">
+        <p class="flowers-tease-text fade-up" id="flowers-tease-text">soooooo... about the flowers...</p>
+        <button type="button" class="btn btn--ghost fade-up delay-3" data-next="flowers-note">
+          Continue
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ───────── Flowers apology ───────── -->
+    <section id="screen-flowers-note" class="screen" aria-label="Flower note" hidden>
+      <div class="screen-inner screen-inner--narrow">
+        <div class="flowers-note fade-up">
+          <p>I spent too much time working on this to figure out how to order flowers to ur house.. but im good at coding so heres some imaginary online flowers that contains all of your favorites!</p>
+          <p class="flowers-note__aside">I promise to make it up to you later :(</p>
+        </div>
+        <button type="button" class="btn btn--primary fade-up delay-3" data-next="flowers-garden">
+          See your flowers
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ───────── Flower garden ───────── -->
+    <section id="screen-flowers-garden" class="screen screen--garden" aria-label="Flower garden" hidden>
+      <div class="garden-inner">
+        <p class="eyebrow fade-up">For May</p>
+        <h2 class="section-title garden-title fade-up delay-1">Your midnight garden</h2>
+        <div class="garden" id="flower-garden" aria-label="A garden of your favorite flowers"></div>
       </div>
     </section>
 
