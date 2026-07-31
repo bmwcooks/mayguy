@@ -81,6 +81,6 @@ export const COUPON_CODE = "not icecream";
 
 export const GOODBYE_LINES = [
   "See you again soon.",
-  "Love,",
-  "Ben",
+  "from the goat,",
+  "ben (sorry for the lack of flowers..)",
 ];

@@ -29,8 +29,8 @@
       <div class="envelope-stage">
         <p class="envelope-hint">Tap to open</p>
         <button type="button" id="envelope" class="envelope" aria-label="Open envelope from Ben to May">
-          <div class="envelope__flap"></div>
-          <div class="envelope__pocket">
+          <div class="envelope__pocket" aria-hidden="true"></div>
+          <div class="envelope__well">
             <div class="envelope__letter">
               <div class="letter-content">
                 <p class="letter-label">To</p>
@@ -41,6 +41,8 @@
               </div>
             </div>
           </div>
+          <div class="envelope__front" aria-hidden="true"></div>
+          <div class="envelope__flap" aria-hidden="true"></div>
           <div class="envelope__seal" aria-hidden="true">
             <span class="seal-initial">B</span>
           </div>
@@ -53,10 +55,10 @@
       <div class="screen-inner screen-inner--narrow">
         <p class="eyebrow fade-up">A little something</p>
         <h1 class="welcome-title fade-up delay-1">Hi May <span class="heart" aria-hidden="true">♥</span></h1>
-        <p class="welcome-subtitle fade-up delay-2">Happy (Almost) National Girlfriend Day!</p>
+        <p class="welcome-subtitle fade-up delay-2">Happy National Girlfriend (almost..) Day!</p>
         <div class="welcome-body fade-up delay-3">
-          <p>I know we haven't known each other forever, but I wanted to make something that we could look back on later.</p>
-          <p>This isn't every memory we've had together—just some of my favorites.</p>
+          <p>I know we haven't known each other for long, but I wanted to make something that we could look back on later.</p>
+          <p>This isn't every memory we've had together; just some of my favorites.</p>
         </div>
         <button type="button" class="btn btn--primary fade-up delay-4" data-next="disclaimers">
           Start Reading
@@ -208,7 +210,7 @@
             <p class="coupon__redeem-label">Redeem Instructions</p>
             <p class="coupon__redeem">Text Ben:</p>
             <p class="coupon__code" id="coupon-code">not icecream</p>
-            <button type="button" class="btn btn--secondary" id="copy-code">
+            <button type="button" class="btn btn--coupon" id="copy-code">
               Copy Code
             </button>
             <p class="coupon__copied" id="copy-feedback" hidden>Copied</p>
