@@ -1,0 +1,371 @@
+# National Girlfriend Day Website Rules
+
+## Project Overview
+
+Build a premium-quality, mobile-first GitHub Pages website for my long-distance girlfriend.
+
+This should NOT feel like a generic website.
+
+It should feel like opening a beautifully designed iPhone app or interactive digital scrapbook.
+
+The overall experience should be emotional, polished, elegant, and memorable.
+
+The target audience is ONE person.
+
+Everything should prioritize beauty over showing off technical complexity.
+
+---
+
+# Tech Stack
+
+Use:
+
+- HTML
+- CSS
+- JavaScript
+
+No frameworks unless absolutely necessary.
+
+Optimize for GitHub Pages.
+
+Everything should be static.
+
+No backend.
+
+No database.
+
+No external dependencies that could easily break.
+
+---
+
+# Mobile First
+
+This website is designed primarily for iPhone Safari.
+
+Desktop should still work, but mobile is the priority.
+
+Every screen should fit naturally on an iPhone.
+
+Avoid desktop interactions like hover effects.
+
+Use touch-friendly buttons.
+
+Support swipe gestures.
+
+Animations should be smooth at 60fps.
+
+---
+
+# Overall Theme
+
+The visual style should resemble:
+
+- Apple-quality UI
+- Premium iOS app
+- Midnight sky
+- Deep navy gradients
+- Soft stars
+- Paper scrapbook
+- Warm handwritten notes
+
+Think:
+
+Opening someone's private journal at midnight.
+
+NOT:
+
+A Valentine's Day template.
+
+Avoid cheesy designs.
+
+Avoid bright reds.
+
+Avoid excessive hearts.
+
+Use hearts sparingly.
+
+---
+
+# User Flow
+
+The experience should be:
+
+Envelope
+
+↓
+
+Welcome Page
+
+↓
+
+Disclaimers
+
+↓
+
+Interactive Scrapbook
+
+↓
+
+Gift Box
+
+↓
+
+Gift Reveal
+
+↓
+
+Final Goodbye
+
+There should never be a confusing navigation menu.
+
+The experience should naturally flow from beginning to end.
+
+---
+
+# Envelope
+
+The website opens with a beautiful envelope.
+
+Text:
+
+To:
+May
+
+Happy (Almost) National Girlfriend Day!
+
+From:
+Ben
+
+The envelope should have a satisfying opening animation.
+
+Only after opening should the rest of the experience begin.
+
+---
+
+# Welcome Page
+
+Include:
+
+Hi May ❤️
+
+Happy (Almost) National Girlfriend Day!
+
+I know we haven't known each other forever, but I wanted to make something that we could look back on later.
+
+This isn't every memory we've had together—just some of my favorites.
+
+A button:
+
+Start Reading →
+
+---
+
+# Disclaimers
+
+Show two tasteful cards.
+
+Card 1
+
+Everything on this website uses Ben Standard Time (PST).
+
+Sorry Japan ❤️
+
+Card 2
+
+These definitely aren't all of our memories.
+
+These are simply some of my favorite moments that I wanted to remember forever.
+
+---
+
+# Scrapbook
+
+The scrapbook is the main feature.
+
+Each page should feel handcrafted.
+
+Include:
+
+- paper texture
+- tape
+- photo
+- handwritten title
+- handwritten date
+- small decorations
+- page number
+
+Photos should automatically crop into attractive squares.
+
+Support horizontal swiping between pages.
+
+Every scrapbook page should fill the screen.
+
+Keep text readable.
+
+Never overcrowd the page.
+
+---
+
+# Memories
+
+Create pages using the supplied data.
+
+Stories should remain short.
+
+Maximum:
+
+2–3 sentences.
+
+The handwritten date belongs near the bottom.
+
+---
+
+# Gift Box
+
+The gift box should feel like opening a real present.
+
+Use two password screens.
+
+Lock One
+
+Question:
+
+What is my phone password?
+
+Answer:
+
+nby8ryu3
+
+Lock Two
+
+Question:
+
+What is my middle name?
+
+Answer:
+
+michael
+
+Do NOT expose answers in page source unless unavoidable.
+
+Once unlocked:
+
+Beautiful opening animation.
+
+Confetti.
+
+Gift coupon.
+
+---
+
+# Coupon
+
+Display a premium coupon.
+
+Title:
+
+One Free Meal ❤️
+
+Value:
+
+Up to ¥5000
+
+Redeem Instructions:
+
+Text Ben:
+
+not icecream
+
+Include a Copy Code button.
+
+---
+
+# Final Screen
+
+Fade into a starry night.
+
+Slow typewriter animation.
+
+Display:
+
+See you again soon.
+
+Love,
+
+Ben
+
+No buttons.
+
+No restart.
+
+Let the moment breathe.
+
+---
+
+# Animations
+
+Prioritize quality.
+
+Use:
+
+- spring animations
+- page fades
+- subtle scaling
+- paper movement
+- realistic easing
+
+Avoid flashy animations.
+
+No spinning objects.
+
+No excessive bouncing.
+
+---
+
+# Performance
+
+Images should lazy-load.
+
+Compress assets.
+
+Maintain smooth scrolling.
+
+Everything should feel fast on an iPhone.
+
+---
+
+# Accessibility
+
+Large tap targets.
+
+Readable fonts.
+
+Good contrast.
+
+Responsive layouts.
+
+---
+
+# Code Quality
+
+Organize code cleanly.
+
+Separate HTML, CSS, and JS.
+
+Comment major sections.
+
+Make it easy to add or edit scrapbook pages later.
+
+---
+
+# Design Philosophy
+
+Every design decision should answer:
+
+"Would this make May smile?"
+
+If yes, keep it.
+
+If not, simplify it.
+
+Quality is more important than quantity.
