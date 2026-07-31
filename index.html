@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#070b16" />
+  <meta name="description" content="A private scrapbook for May — Happy (Almost) National Girlfriend Day." />
+  <title>For May</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Soft starfield (drawn by JS) -->
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="sky-glow" aria-hidden="true"></div>
+
+  <main id="app">
+
+    <!-- ───────── Envelope ───────── -->
+    <section id="screen-envelope" class="screen screen--active" aria-label="Sealed envelope">
+      <div class="envelope-stage">
+        <p class="envelope-hint">Tap to open</p>
+        <button type="button" id="envelope" class="envelope" aria-label="Open envelope from Ben to May">
+          <div class="envelope__flap"></div>
+          <div class="envelope__pocket">
+            <div class="envelope__letter">
+              <div class="letter-content">
+                <p class="letter-label">To</p>
+                <p class="letter-name">May</p>
+                <p class="letter-message">Happy (Almost)<br />National Girlfriend Day!</p>
+                <p class="letter-label letter-label--from">From</p>
+                <p class="letter-name letter-name--from">Ben</p>
+              </div>
+            </div>
+          </div>
+          <div class="envelope__seal" aria-hidden="true">
+            <span class="seal-initial">B</span>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ───────── Welcome ───────── -->
+    <section id="screen-welcome" class="screen" aria-label="Welcome" hidden>
+      <div class="screen-inner screen-inner--narrow">
+        <p class="eyebrow fade-up">A little something</p>
+        <h1 class="welcome-title fade-up delay-1">Hi May <span class="heart" aria-hidden="true">♥</span></h1>
+        <p class="welcome-subtitle fade-up delay-2">Happy (Almost) National Girlfriend Day!</p>
+        <div class="welcome-body fade-up delay-3">
+          <p>I know we haven't known each other forever, but I wanted to make something that we could look back on later.</p>
+          <p>This isn't every memory we've had together—just some of my favorites.</p>
+        </div>
+        <button type="button" class="btn btn--primary fade-up delay-4" data-next="disclaimers">
+          Start Reading
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ───────── Disclaimers ───────── -->
+    <section id="screen-disclaimers" class="screen" aria-label="Notes" hidden>
+      <div class="screen-inner screen-inner--narrow">
+        <p class="eyebrow fade-up">Before we begin</p>
+        <h2 class="section-title fade-up delay-1">A couple of notes</h2>
+
+        <div class="note-stack">
+          <article class="note-card fade-up delay-2">
+            <p class="note-card__title">Timezone</p>
+            <p class="note-card__body">Everything on this website uses Ben Standard Time (PST).</p>
+            <p class="note-card__aside">Sorry Japan <span class="heart" aria-hidden="true">♥</span></p>
+          </article>
+
+          <article class="note-card fade-up delay-3">
+            <p class="note-card__title">Memories</p>
+            <p class="note-card__body">These definitely aren't all of our memories.</p>
+            <p class="note-card__body">These are simply some of my favorite moments that I wanted to remember forever.</p>
+          </article>
+        </div>
+
+        <button type="button" class="btn btn--primary fade-up delay-4" data-next="scrapbook">
+          Open Scrapbook
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ───────── Scrapbook ───────── -->
+    <section id="screen-scrapbook" class="screen screen--scrapbook" aria-label="Scrapbook" hidden>
+      <div class="scrapbook">
+        <div class="scrapbook__track" id="scrapbook-track" role="list"></div>
+      </div>
+      <div class="scrapbook-chrome">
+        <div class="scrapbook-dots" id="scrapbook-dots" aria-hidden="true"></div>
+        <p class="scrapbook-hint" id="scrapbook-hint">Swipe to turn pages</p>
+        <button type="button" class="btn btn--ghost" id="scrapbook-continue" hidden>
+          Continue
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ───────── Gift intro ───────── -->
+    <section id="screen-gift-intro" class="screen" aria-label="A gift" hidden>
+      <div class="screen-inner screen-inner--narrow">
+        <p class="eyebrow fade-up">One more thing</p>
+        <h2 class="section-title fade-up delay-1">There's a gift waiting</h2>
+        <p class="lede fade-up delay-2">It's locked — only you should know the answers.</p>
+        <button type="button" class="btn btn--primary fade-up delay-3" data-next="gift-lock-1">
+          Unlock Gift
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ───────── Lock One ───────── -->
+    <section id="screen-gift-lock-1" class="screen" aria-label="First lock" hidden>
+      <div class="screen-inner screen-inner--narrow">
+        <div class="lock-badge fade-up" aria-hidden="true">
+          <span class="lock-icon"></span>
+          <span>1 of 2</span>
+        </div>
+        <h2 class="section-title fade-up delay-1">First lock</h2>
+        <p class="lede fade-up delay-2">What is my phone password?</p>
+
+        <form id="lock-form-1" class="lock-form fade-up delay-3" autocomplete="off">
+          <label class="sr-only" for="lock-input-1">Answer</label>
+          <input
+            id="lock-input-1"
+            class="lock-input"
+            type="password"
+            inputmode="text"
+            enterkeyhint="done"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            placeholder="Enter password"
+            required
+          />
+          <p class="lock-error" id="lock-error-1" role="alert" hidden>Not quite — try again.</p>
+          <button type="submit" class="btn btn--primary">Unlock</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ───────── Lock Two ───────── -->
+    <section id="screen-gift-lock-2" class="screen" aria-label="Second lock" hidden>
+      <div class="screen-inner screen-inner--narrow">
+        <div class="lock-badge fade-up" aria-hidden="true">
+          <span class="lock-icon"></span>
+          <span>2 of 2</span>
+        </div>
+        <h2 class="section-title fade-up delay-1">Second lock</h2>
+        <p class="lede fade-up delay-2">What is my middle name?</p>
+
+        <form id="lock-form-2" class="lock-form fade-up delay-3" autocomplete="off">
+          <label class="sr-only" for="lock-input-2">Answer</label>
+          <input
+            id="lock-input-2"
+            class="lock-input"
+            type="text"
+            inputmode="text"
+            enterkeyhint="done"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            placeholder="Enter answer"
+            required
+          />
+          <p class="lock-error" id="lock-error-2" role="alert" hidden>Not quite — try again.</p>
+          <button type="submit" class="btn btn--primary">Open Gift</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ───────── Gift Box Opening ───────── -->
+    <section id="screen-gift-box" class="screen" aria-label="Gift box" hidden>
+      <div class="gift-stage">
+        <div class="gift-box" id="gift-box" aria-hidden="true">
+          <div class="gift-box__lid">
+            <div class="gift-box__bow"></div>
+          </div>
+          <div class="gift-box__body"></div>
+        </div>
+        <p class="gift-opening-text" id="gift-opening-text">Opening…</p>
+      </div>
+      <canvas id="confetti" class="confetti-canvas" aria-hidden="true"></canvas>
+    </section>
+
+    <!-- ───────── Coupon Reveal ───────── -->
+    <section id="screen-gift-reveal" class="screen" aria-label="Gift coupon" hidden>
+      <div class="screen-inner screen-inner--narrow">
+        <p class="eyebrow fade-up">For you</p>
+        <div class="coupon fade-up delay-1">
+          <div class="coupon__edge coupon__edge--top" aria-hidden="true"></div>
+          <div class="coupon__inner">
+            <p class="coupon__label">Gift Coupon</p>
+            <h2 class="coupon__title">One Free Meal <span class="heart" aria-hidden="true">♥</span></h2>
+            <p class="coupon__value">Up to ¥5000</p>
+            <div class="coupon__divider" aria-hidden="true"></div>
+            <p class="coupon__redeem-label">Redeem Instructions</p>
+            <p class="coupon__redeem">Text Ben:</p>
+            <p class="coupon__code" id="coupon-code">not icecream</p>
+            <button type="button" class="btn btn--secondary" id="copy-code">
+              Copy Code
+            </button>
+            <p class="coupon__copied" id="copy-feedback" hidden>Copied</p>
+          </div>
+          <div class="coupon__edge coupon__edge--bottom" aria-hidden="true"></div>
+        </div>
+        <button type="button" class="btn btn--ghost fade-up delay-3" data-next="goodbye">
+          Continue
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ───────── Goodbye ───────── -->
+    <section id="screen-goodbye" class="screen screen--goodbye" aria-label="Goodbye" hidden>
+      <div class="goodbye-inner">
+        <p class="goodbye-line" id="goodbye-line-1"></p>
+        <p class="goodbye-line goodbye-line--soft" id="goodbye-line-2"></p>
+        <p class="goodbye-line goodbye-line--name" id="goodbye-line-3"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
