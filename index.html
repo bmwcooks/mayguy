@@ -24,8 +24,43 @@
 
   <main id="app">
 
+    <!-- ───────── Entry keypad ───────── -->
+    <section id="screen-entry" class="screen screen--active" aria-label="Passcode">
+      <div class="entry-stage">
+        <p class="eyebrow fade-up">Private</p>
+        <h1 class="entry-title fade-up delay-1">Enter Passcode</h1>
+
+        <div class="passcode-dots fade-up delay-2" id="passcode-dots" aria-live="polite" aria-label="Passcode progress">
+          <span class="passcode-dot"></span>
+          <span class="passcode-dot"></span>
+          <span class="passcode-dot"></span>
+          <span class="passcode-dot"></span>
+          <span class="passcode-dot"></span>
+          <span class="passcode-dot"></span>
+        </div>
+        <p class="entry-error" id="entry-error" role="alert" hidden>Try again</p>
+
+        <div class="keypad fade-up delay-3" id="entry-keypad" role="group" aria-label="Number pad">
+          <button type="button" class="keypad-key" data-key="1">1</button>
+          <button type="button" class="keypad-key" data-key="2">2</button>
+          <button type="button" class="keypad-key" data-key="3">3</button>
+          <button type="button" class="keypad-key" data-key="4">4</button>
+          <button type="button" class="keypad-key" data-key="5">5</button>
+          <button type="button" class="keypad-key" data-key="6">6</button>
+          <button type="button" class="keypad-key" data-key="7">7</button>
+          <button type="button" class="keypad-key" data-key="8">8</button>
+          <button type="button" class="keypad-key" data-key="9">9</button>
+          <span class="keypad-spacer" aria-hidden="true"></span>
+          <button type="button" class="keypad-key" data-key="0">0</button>
+          <button type="button" class="keypad-key keypad-key--action" data-key="delete" aria-label="Delete">
+            <span class="keypad-delete" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
     <!-- ───────── Envelope ───────── -->
-    <section id="screen-envelope" class="screen screen--active" aria-label="Sealed envelope">
+    <section id="screen-envelope" class="screen" aria-label="Sealed envelope" hidden>
       <div class="envelope-stage">
         <p class="envelope-hint">Tap to open</p>
         <button type="button" id="envelope" class="envelope" aria-label="Open envelope from Ben to May">

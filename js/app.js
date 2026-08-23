@@ -4,9 +4,11 @@ import { initStars } from "./stars.js";
 import { initScrapbook } from "./scrapbook.js";
 import { initLocks, playGiftOpen, initCouponCopy } from "./gift.js";
 import { renderGarden } from "./flowers.js";
+import { initEntryKeypad } from "./keypad.js";
 import { GOODBYE_LINES, MEMORIES } from "./data.js";
 
 const SCREENS = {
+  entry: "screen-entry",
   envelope: "screen-envelope",
   welcome: "screen-welcome",
   disclaimers: "screen-disclaimers",
@@ -22,7 +24,7 @@ const SCREENS = {
   "flowers-garden": "screen-flowers-garden",
 };
 
-let current = "envelope";
+let current = "entry";
 let transitioning = false;
 
 function getScreen(key) {
@@ -167,6 +169,9 @@ async function typeLine(el, text, speed) {
 initStars(document.getElementById("stars"));
 initEnvelope();
 initCouponCopy();
+initEntryKeypad({
+  onUnlock: () => goTo("envelope"),
+});
 
 const scrapbook = initScrapbook({
   onComplete: () => goTo("gift-intro"),
@@ -192,7 +197,7 @@ document.getElementById("goodbye-continue")?.addEventListener("click", () => {
 document.addEventListener(
   "touchmove",
   (e) => {
-    if (e.target.closest(".scrapbook, .lock-form, #screen-gift-lock-1, #screen-gift-lock-2, .garden")) {
+    if (e.target.closest(".scrapbook, .lock-form, #screen-gift-lock-1, #screen-gift-lock-2, .garden, .keypad")) {
       return;
     }
     if (e.touches.length === 1) {
