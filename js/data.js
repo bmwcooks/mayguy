@@ -71,11 +71,15 @@ export const MEMORIES = [
 
 /** SHA-256 hex digests of answers (lowercase, trimmed). */
 export const LOCK_HASHES = {
+  // entry keypad PIN
+  entry: "eccd23367a8f769b03574808e31e6c6ce5532190034a819d23a3cc4154384ce1",
   // phone password
   one: "c69f149bd6329f1c504ff70e083d287b5cbf063fedbd8385d696d84f552118a6",
   // middle name
   two: "34550715062af006ac4fab288de67ecb44793c3a05c475227241535f6ef7a81b",
 };
+
+export const ENTRY_PIN_LENGTH = 6;
 
 export const COUPON_CODE = "not icecream";
 
