@@ -32,14 +32,17 @@ export function initEntryKeypad({ onUnlock }) {
 
   async function submit() {
     locked = true;
-    const hash = await sha256Hex(pin);
-    if (hash === LOCK_HASHES.entry) {
-      dotsRow?.classList.add("is-success");
-      setTimeout(() => onUnlock?.(), 320);
-      return;
+    try {
+      const hash = await sha256Hex(pin);
+      if (hash === LOCK_HASHES.entry) {
+        dotsRow?.classList.add("is-success");
+        setTimeout(() => onUnlock?.(), 320);
+        return;
+      }
+    } catch {
+      // crypto.subtle unavailable — fall through to wrong state
     }
 
-    // Wrong PIN — shake and reset
     if (error) error.hidden = false;
     dotsRow?.classList.add("is-wrong");
     keypad.classList.add("is-wrong");
@@ -75,9 +78,12 @@ export function initEntryKeypad({ onUnlock }) {
     }
   }
 
-  function onClick(e) {
+  // pointerdown feels snappier on iPhone than waiting for click
+  function onPointerDown(e) {
     const btn = e.target.closest("[data-key]");
-    if (!btn) return;
+    if (!btn || !keypad.contains(btn)) return;
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    e.preventDefault();
     press(btn.getAttribute("data-key"));
   }
 
@@ -96,13 +102,13 @@ export function initEntryKeypad({ onUnlock }) {
     }
   }
 
-  keypad.addEventListener("click", onClick);
+  keypad.addEventListener("pointerdown", onPointerDown);
   window.addEventListener("keydown", onKeydown);
   renderDots();
 
   return {
     destroy() {
-      keypad.removeEventListener("click", onClick);
+      keypad.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("keydown", onKeydown);
     },
   };

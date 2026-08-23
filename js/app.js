@@ -193,11 +193,15 @@ document.getElementById("goodbye-continue")?.addEventListener("click", () => {
   goTo("flowers-tease");
 });
 
-// Quiet the iOS rubber-band without blocking interactive regions
+// Quiet iOS rubber-band without blocking taps on interactive controls
 document.addEventListener(
   "touchmove",
   (e) => {
-    if (e.target.closest(".scrapbook, .lock-form, #screen-gift-lock-1, #screen-gift-lock-2, .garden, .keypad")) {
+    if (
+      e.target.closest(
+        ".scrapbook, .lock-form, #screen-gift-lock-1, #screen-gift-lock-2, .garden, .keypad, .keypad-key, #screen-entry"
+      )
+    ) {
       return;
     }
     if (e.touches.length === 1) {
