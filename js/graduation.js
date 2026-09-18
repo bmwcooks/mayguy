@@ -53,33 +53,9 @@ async function goTo(next) {
     countdown?.destroy();
     countdown = initCountdown(document.getElementById("grad-countdown"));
   }
-  if (next === "letter") {
-    revealLetterIfPresent();
-  }
   if (next !== "landing") {
     confetti?.stop();
   }
-}
-
-async function revealLetterIfPresent() {
-  const img = document.getElementById("grad-letter-image");
-  const frame = document.querySelector(".letter-frame");
-  if (!img || !frame) return;
-
-  try {
-    const res = await fetch("assets/images/graduation-letter.webp", { method: "HEAD" });
-    if (!res.ok) return;
-  } catch {
-    return;
-  }
-
-  const show = () => {
-    img.hidden = false;
-    frame.classList.add("has-photo");
-  };
-
-  img.addEventListener("load", show, { once: true });
-  img.src = "assets/images/graduation-letter.webp";
 }
 
 function bootLanding() {
@@ -96,7 +72,6 @@ function bootLanding() {
 
 initStars(document.getElementById("stars"));
 bootLanding();
-revealLetterIfPresent();
 
 document.querySelectorAll("[data-next]").forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -108,7 +83,7 @@ document.querySelectorAll("[data-next]").forEach((btn) => {
 document.addEventListener(
   "touchmove",
   (e) => {
-    if (e.target.closest(".letter-frame, .day-list")) return;
+    if (e.target.closest("#screen-grad-letter, .day-list")) return;
     if (e.touches.length === 1) e.preventDefault();
   },
   { passive: false }
