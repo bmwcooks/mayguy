@@ -1648,6 +1648,59 @@ button {
 }
 
 /* =========================================================
+   Special days hub
+   ========================================================= */
+.day-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.day-card {
+  display: block;
+  text-align: left;
+  text-decoration: none;
+  padding: 1.1rem 1.15rem 1.05rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: var(--moon);
+  min-height: 4.5rem;
+  transition: transform 0.2s var(--ease-spring), background 0.2s;
+}
+
+.day-card:active {
+  transform: scale(0.98);
+}
+
+.day-card.is-current {
+  border-color: rgba(201, 184, 150, 0.28);
+}
+
+.day-card__label {
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  margin-bottom: 0.28rem;
+}
+
+.day-card__title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.day-card__meta {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--moon-muted);
+}
+
+/* =========================================================
    Reduced motion
    ========================================================= */
 @media (prefers-reduced-motion: reduce) {

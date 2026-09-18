@@ -1,0 +1,215 @@
+/* Graduation experience — same midnight palette, quieter ceremony */
+
+.screen--landing {
+  justify-content: center;
+}
+
+.flower-confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.flower-piece {
+  position: absolute;
+  top: -12vh;
+  z-index: 1;
+  animation: flowerFall var(--fall-duration, 10s) var(--ease-out) var(--fall-delay, 0s) both;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.22));
+}
+
+.flower-piece .bloom-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes flowerFall {
+  0% {
+    transform: translate3d(0, -12vh, 0) rotate(-12deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--drift, 10vw), 118vh, 0) rotate(var(--spin, 28deg));
+    opacity: 0.35;
+  }
+}
+
+.grad-popup {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 21.5rem);
+  padding: 1.85rem 1.5rem 1.55rem;
+  border-radius: 1.15rem;
+  background:
+    linear-gradient(165deg, #f8f4ec 0%, var(--paper) 48%, #e6ddd0 100%);
+  color: var(--ink);
+  text-align: center;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.55) inset,
+    0 22px 50px rgba(0, 0, 0, 0.38);
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.grad-popup.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.grad-popup .eyebrow {
+  color: #8a8174;
+  margin-bottom: 0.7rem;
+}
+
+.grad-popup__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 7vw, 2.15rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.35rem;
+  text-wrap: balance;
+}
+
+.grad-popup__aside {
+  display: block;
+  margin-top: 0.45rem;
+  font-family: var(--font-hand);
+  font-size: clamp(1.15rem, 4.6vw, 1.4rem);
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.grad-popup .btn--primary {
+  width: 100%;
+  margin-top: 1.25rem;
+}
+
+/* Countdown */
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  width: 100%;
+  max-width: 20rem;
+  margin: 0.35rem 0 0.25rem;
+}
+
+.countdown-unit {
+  padding: 0.95rem 0.6rem 0.8rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.countdown-value {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 9vw, 2.6rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--moon);
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown-label {
+  margin-top: 0.4rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--moon-muted);
+}
+
+.countdown-status {
+  font-family: var(--font-hand);
+  font-size: 1.25rem;
+  color: var(--gold-soft);
+}
+
+.countdown-note {
+  font-size: 0.82rem;
+  color: var(--moon-muted);
+  margin-top: -0.35rem;
+}
+
+/* Letter frame */
+.letter-frame {
+  position: relative;
+  width: 100%;
+  margin: 0.35rem 0 0.5rem;
+  background:
+    linear-gradient(165deg, #f7f3eb 0%, var(--paper) 40%, var(--paper-deep) 100%);
+  padding: 0.85rem 0.75rem 0.95rem;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 16px 36px rgba(0, 0, 0, 0.3);
+}
+
+.letter-frame__photo {
+  width: 100%;
+  height: auto;
+  display: none;
+  object-fit: contain;
+  background: #fff;
+}
+
+.letter-frame.has-photo .letter-frame__photo {
+  display: block;
+}
+
+.letter-frame__placeholder {
+  min-height: 16rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 1.5rem 1rem;
+  border: 1px dashed rgba(90, 82, 72, 0.28);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.letter-frame__waiting {
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  color: var(--ink);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.letter-frame__hint {
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+}
+
+.letter-frame.has-photo .letter-frame__placeholder {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flower-piece {
+    animation: none !important;
+  }
+
+  .grad-popup {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-height: 700px) {
+  .grad-popup {
+    padding: 1.45rem 1.25rem 1.25rem;
+  }
+
+  .letter-frame__placeholder {
+    min-height: 12.5rem;
+  }
+}

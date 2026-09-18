@@ -210,11 +210,22 @@ const BLOOM_RENDERERS = {
   lily: lilySvg,
 };
 
+/** Unique-id bloom markup for garden or confetti. */
+export function bloomMarkup(id, { uid = id, includeStem = true } = {}) {
+  let svg = BLOOM_RENDERERS[id]?.() ?? "";
+  svg = svg.replaceAll('id="', `id="${uid}-`).replaceAll("url(#", `url(#${uid}-`);
+  if (!includeStem) {
+    svg = svg.replace(/<g class="bloom-stem">[\s\S]*?<\/g>/, "");
+    svg = svg.replace('viewBox="0 0 120 140"', 'viewBox="8 6 104 72"');
+  }
+  return svg;
+}
+
 export function renderGarden(container) {
   if (!container) return;
 
   container.innerHTML = FLOWERS.map((flower) => {
-    const svg = BLOOM_RENDERERS[flower.id]?.() ?? "";
+    const svg = bloomMarkup(flower.id, { uid: `garden-${flower.id}` });
     return `
       <figure class="bloom" data-flower="${flower.id}" style="--bloom-delay: ${flower.delay}s">
         ${svg}
