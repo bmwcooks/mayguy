@@ -42,7 +42,7 @@ export function initCountdown(root, { target = GRADUATION_DATE } = {}) {
     if (statusEl) {
       statusEl.textContent = t.done
         ? "It's here."
-        : "until June 10, 2028";
+        : "until June 10, 2028"; // Ben's graduation
     }
   }
 

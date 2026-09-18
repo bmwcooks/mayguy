@@ -133,10 +133,11 @@
   color: var(--gold-soft);
 }
 
-.countdown-note {
-  font-size: 0.82rem;
+.countdown-joke {
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
   color: var(--moon-muted);
-  margin-top: -0.35rem;
+  margin-top: -0.2rem;
 }
 
 /* Letter frame */
