@@ -22,6 +22,7 @@ const SCREENS = {
   "flowers-tease": "screen-flowers-tease",
   "flowers-note": "screen-flowers-note",
   "flowers-garden": "screen-flowers-garden",
+  hub: "screen-hub",
 };
 
 let current = "entry";
@@ -69,6 +70,13 @@ async function goTo(next, { delay = 0 } = {}) {
   if (next === "goodbye") runGoodbye();
   if (next === "flowers-garden") {
     renderGarden(document.getElementById("flower-garden"));
+    const gardenBtn = document.getElementById("garden-continue");
+    if (gardenBtn) {
+      gardenBtn.hidden = true;
+      setTimeout(() => {
+        gardenBtn.hidden = false;
+      }, 1400);
+    }
   }
 }
 
@@ -191,6 +199,10 @@ document.querySelectorAll("[data-next]").forEach((btn) => {
 
 document.getElementById("goodbye-continue")?.addEventListener("click", () => {
   goTo("flowers-tease");
+});
+
+document.getElementById("garden-continue")?.addEventListener("click", () => {
+  goTo("hub");
 });
 
 // Quiet iOS rubber-band without blocking taps on interactive controls
