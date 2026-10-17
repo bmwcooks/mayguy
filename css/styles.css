@@ -1650,6 +1650,17 @@ button {
 /* =========================================================
    Special days hub
    ========================================================= */
+#screen-hub {
+  justify-content: flex-start;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#screen-hub .screen-inner {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .day-list {
   display: flex;
   flex-direction: column;
