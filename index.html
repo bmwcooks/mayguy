@@ -6,8 +6,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="theme-color" content="#070b16" />
-  <meta name="description" content="A private note for May — congrats to my favorite grad." />
-  <title>For May — Graduation</title>
+  <meta name="description" content="A private note for May — happy birthday." />
+  <title>For May — Birthday</title>
 
   <link rel="preload" href="assets/fonts/cormorant-500.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/outfit-300.woff2" as="font" type="font/woff2" crossorigin />
@@ -15,7 +15,7 @@
 
   <link rel="stylesheet" href="css/fonts.css" />
   <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="css/graduation.css" />
+  <link rel="stylesheet" href="css/birthday.css" />
 </head>
 <body>
   <canvas id="stars" aria-hidden="true"></canvas>
@@ -24,77 +24,44 @@
   <main id="app">
 
     <!-- ───────── Landing ───────── -->
-    <section id="screen-grad-landing" class="screen screen--active screen--landing" aria-label="Graduation">
+    <section id="screen-bday-landing" class="screen screen--active screen--bday" aria-label="Birthday">
       <div class="flower-confetti" id="flower-confetti" aria-hidden="true"></div>
 
-      <div class="grad-popup" id="grad-popup">
-        <p class="eyebrow">A little something</p>
-        <h1 class="grad-popup__title">
-          congrats to my favorite grad!
-          <span class="grad-popup__aside">(and favorite person).</span>
-        </h1>
-        <button type="button" class="btn btn--primary" data-next="countdown">
-          Continue
-          <span class="btn-arrow" aria-hidden="true">→</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- ───────── Countdown ───────── -->
-    <section id="screen-grad-countdown" class="screen" aria-label="Graduation countdown" hidden>
-      <div class="screen-inner">
-        <p class="eyebrow fade-up">My turn</p>
-        <h2 class="section-title fade-up delay-1">Until I graduate</h2>
-
-        <div class="countdown fade-up delay-2" id="grad-countdown">
-          <div class="countdown-unit">
-            <p class="countdown-value" data-unit="days">0</p>
-            <p class="countdown-label">days</p>
-          </div>
-          <div class="countdown-unit">
-            <p class="countdown-value" data-unit="hours">00</p>
-            <p class="countdown-label">hours</p>
-          </div>
-          <div class="countdown-unit">
-            <p class="countdown-value" data-unit="minutes">00</p>
-            <p class="countdown-label">minutes</p>
-          </div>
-          <div class="countdown-unit">
-            <p class="countdown-value" data-unit="seconds">00</p>
-            <p class="countdown-label">seconds</p>
-          </div>
+      <div class="bday-stage">
+        <div class="candle" id="birthday-candle" aria-hidden="true">
+          <span class="candle__glow"></span>
+          <span class="candle__flame"></span>
+          <span class="candle__wick"></span>
+          <span class="candle__wax"></span>
         </div>
 
-        <p class="countdown-status fade-up delay-3" data-countdown-status>until June 10, 2028</p>
-        <p class="countdown-joke fade-up delay-3">(yikes this is a long time...)</p>
-
-        <button type="button" class="btn btn--primary fade-up delay-4" data-next="letter">
-          Continue
-          <span class="btn-arrow" aria-hidden="true">→</span>
-        </button>
+        <div class="bday-popup" id="bday-popup">
+          <p class="eyebrow">October 19</p>
+          <h1 class="bday-popup__title">
+            happy birthday, may
+            <span class="bday-popup__aside">(my favorite person, still).</span>
+          </h1>
+          <button type="button" class="btn btn--primary" id="bday-wish">
+            Blow it out
+          </button>
+        </div>
       </div>
     </section>
 
-    <!-- ───────── Handwritten letter ───────── -->
-    <section id="screen-grad-letter" class="screen" aria-label="A handwritten letter" hidden>
+    <!-- ───────── Note ───────── -->
+    <section id="screen-bday-note" class="screen" aria-label="A birthday note" hidden>
       <div class="screen-inner screen-inner--narrow">
         <p class="eyebrow fade-up">For you</p>
-        <h2 class="section-title fade-up delay-1">A letter</h2>
+        <h2 class="section-title fade-up delay-1">A note</h2>
 
-        <figure class="letter-frame fade-up delay-2">
+        <article class="bday-note fade-up delay-2">
           <span class="page-tape page-tape--tl" aria-hidden="true"></span>
           <span class="page-tape page-tape--tr" aria-hidden="true"></span>
-          <img
-            id="grad-letter-image"
-            class="letter-frame__photo"
-            src="assets/images/graduation-letter.webp"
-            alt="A handwritten letter from Ben to May"
-            width="656"
-            height="816"
-            loading="eager"
-            decoding="async"
-          />
-        </figure>
+          <p>hey may!</p>
+          <p>happy birthday.</p>
+          <p>i hope today is a really good one. i’m so glad it’s yours.</p>
+          <p class="bday-note__sign">lots of love — ben :)</p>
+        </article>
 
         <button type="button" class="btn btn--ghost fade-up delay-3" data-next="hub">
           Continue
@@ -112,6 +79,11 @@
         <div class="day-list fade-up delay-3">
           <a class="day-card is-current" href="index.html" aria-current="page">
             <p class="day-card__label">You were just here</p>
+            <p class="day-card__title">Birthday</p>
+            <p class="day-card__meta">10/19</p>
+          </a>
+          <a class="day-card" href="graduation.html">
+            <p class="day-card__label">A favorite</p>
             <p class="day-card__title">Graduation</p>
             <p class="day-card__meta">09/20/26</p>
           </a>
@@ -126,6 +98,6 @@
 
   </main>
 
-  <script type="module" src="js/graduation.js"></script>
+  <script type="module" src="js/birthday.js"></script>
 </body>
 </html>

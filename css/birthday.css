@@ -1,0 +1,252 @@
+/* Birthday — one candle on the same midnight paper */
+
+.screen--bday {
+  justify-content: center;
+}
+
+.flower-confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.flower-piece {
+  position: absolute;
+  top: -12vh;
+  z-index: 1;
+  animation: flowerFall var(--fall-duration, 11s) var(--ease-out) var(--fall-delay, 0s) both;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.22));
+}
+
+.flower-piece .bloom-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes flowerFall {
+  0% {
+    transform: translate3d(0, -12vh, 0) rotate(-12deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--drift, 10vw), 118vh, 0) rotate(var(--spin, 28deg));
+    opacity: 0.35;
+  }
+}
+
+.bday-stage {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 21.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* A single thin candle, resting on the card */
+.candle {
+  position: relative;
+  z-index: 3;
+  width: 4.5rem;
+  height: 5.6rem;
+  margin-bottom: -1.35rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+.candle__glow {
+  position: absolute;
+  top: -1.1rem;
+  width: 8.5rem;
+  height: 8.5rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 196, 130, 0.34) 0%, rgba(232, 196, 130, 0.08) 42%, transparent 70%);
+  filter: blur(2px);
+  transition: opacity 0.7s var(--ease-out);
+}
+
+.candle__flame {
+  width: 0.7rem;
+  height: 1.15rem;
+  margin-bottom: -0.12rem;
+  border-radius: 50% 50% 46% 46% / 62% 62% 38% 38%;
+  background:
+    radial-gradient(circle at 50% 78%, #fff8ea 0%, #f3d48a 46%, rgba(224, 176, 90, 0.2) 78%, transparent 82%);
+  box-shadow:
+    0 0 10px 3px rgba(243, 212, 138, 0.55),
+    0 0 26px 8px rgba(201, 184, 150, 0.28);
+  transform-origin: 50% 100%;
+  animation: flame 1.7s ease-in-out infinite;
+  transition: opacity 0.45s var(--ease-out), transform 0.55s var(--ease-out), filter 0.45s;
+}
+
+.candle__wick {
+  width: 1.5px;
+  height: 0.42rem;
+  background: #3a3228;
+  border-radius: 1px;
+}
+
+.candle__wax {
+  width: 0.82rem;
+  height: 2.85rem;
+  border-radius: 0.18rem 0.18rem 0.12rem 0.12rem;
+  background: linear-gradient(90deg, #e4d8c4 0%, #f8f3ea 46%, #d8ccb6 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.65) inset,
+    0 10px 16px rgba(0, 0, 0, 0.22);
+}
+
+.candle.is-out .candle__flame {
+  animation: none;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.35);
+  filter: blur(1.5px);
+}
+
+.candle.is-out .candle__glow {
+  opacity: 0;
+}
+
+@keyframes flame {
+  0%,
+  100% {
+    transform: scale(1) rotate(-1deg);
+  }
+  50% {
+    transform: scale(0.94, 1.05) rotate(1.5deg);
+  }
+}
+
+.bday-popup {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 2.15rem 1.45rem 1.45rem;
+  border-radius: 1.15rem;
+  background: linear-gradient(165deg, #f8f4ec 0%, var(--paper) 48%, #e6ddd0 100%);
+  color: var(--ink);
+  text-align: center;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.55) inset,
+    0 22px 50px rgba(0, 0, 0, 0.38);
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.bday-popup.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.bday-popup .eyebrow {
+  color: #8a8174;
+  margin-bottom: 0.65rem;
+}
+
+.bday-popup__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 7.4vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+.bday-popup__aside {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--font-hand);
+  font-size: clamp(1.15rem, 4.6vw, 1.4rem);
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.bday-popup .btn--primary {
+  width: 100%;
+  margin-top: 1.2rem;
+}
+
+.bday-popup .btn:disabled {
+  opacity: 0.72;
+}
+
+/* Handwritten-style note, blue ink like the graduation letter */
+.bday-note {
+  position: relative;
+  width: 100%;
+  margin: 0.15rem 0 0.2rem;
+  padding: 1.55rem 1.2rem 1.3rem;
+  text-align: left;
+  color: #2a4a78;
+  background: linear-gradient(165deg, #f7f3eb 0%, var(--paper) 40%, var(--paper-deep) 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 16px 36px rgba(0, 0, 0, 0.3);
+}
+
+.bday-note p {
+  font-family: var(--font-hand);
+  font-size: clamp(1.35rem, 5.4vw, 1.62rem);
+  font-weight: 600;
+  line-height: 1.32;
+}
+
+.bday-note p + p {
+  margin-top: 0.72rem;
+}
+
+.bday-note__sign {
+  margin-top: 1rem !important;
+}
+
+#screen-bday-note {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flower-piece,
+  .candle__flame {
+    animation: none !important;
+  }
+
+  .bday-popup {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-height: 700px) {
+  .candle {
+    height: 4.7rem;
+    margin-bottom: -1.15rem;
+  }
+
+  .candle__wax {
+    height: 2.35rem;
+  }
+
+  .bday-popup {
+    padding: 1.85rem 1.2rem 1.2rem;
+  }
+
+  .bday-popup__title {
+    font-size: clamp(1.65rem, 6.8vw, 2rem);
+  }
+
+  #screen-bday-note .screen-inner {
+    gap: 0.85rem;
+  }
+}
