@@ -1,4 +1,4 @@
-/* Birthday — one candle, a short note, then the other days */
+/* Birthday — candle, note, age gap, phone, then the other days */
 
 import { initStars } from "./stars.js";
 import { startFlowerConfetti } from "./flower-confetti.js";
@@ -6,6 +6,8 @@ import { startFlowerConfetti } from "./flower-confetti.js";
 const SCREENS = {
   landing: "screen-bday-landing",
   note: "screen-bday-note",
+  older: "screen-bday-older",
+  gift: "screen-bday-gift",
   hub: "screen-hub",
 };
 
@@ -50,6 +52,25 @@ async function goTo(next) {
   if (next !== "landing") confetti?.stop();
 }
 
+function mountPhoto(img) {
+  const frame = img?.closest(".photo-frame");
+  if (!img || !frame) return;
+
+  const show = () => {
+    if (img.naturalWidth <= 0) return;
+    img.hidden = false;
+    frame.classList.add("has-photo");
+  };
+
+  img.addEventListener("load", show);
+  img.addEventListener("error", () => {
+    img.hidden = true;
+    frame.classList.remove("has-photo");
+  });
+
+  if (img.complete) show();
+}
+
 function bootLanding() {
   const layer = document.getElementById("flower-confetti");
   const card = document.getElementById("bday-popup");
@@ -78,6 +99,7 @@ async function blowOut() {
 }
 
 initStars(document.getElementById("stars"));
+document.querySelectorAll("[data-photo]").forEach(mountPhoto);
 bootLanding();
 
 document.getElementById("bday-wish")?.addEventListener("click", blowOut);
@@ -92,7 +114,7 @@ document.querySelectorAll("[data-next]").forEach((btn) => {
 document.addEventListener(
   "touchmove",
   (e) => {
-    if (e.target.closest("#screen-bday-note, .day-list")) return;
+    if (e.target.closest("#screen-bday-note, #screen-bday-gift, #screen-bday-older, .day-list")) return;
     if (e.touches.length === 1) e.preventDefault();
   },
   { passive: false }
