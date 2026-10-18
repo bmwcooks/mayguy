@@ -203,6 +203,10 @@
   background: #f4efe6;
 }
 
+.photo-frame.has-photo {
+  padding-top: 1.45rem;
+}
+
 .photo-frame.has-photo .photo-frame__photo {
   display: block;
 }
