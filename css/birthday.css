@@ -182,38 +182,106 @@
   opacity: 0.72;
 }
 
-/* Handwritten-style note, blue ink like the graduation letter */
-.bday-note {
+/* Photo slots — note and phone. The picture replaces the waiting line. */
+.photo-frame {
   position: relative;
   width: 100%;
-  margin: 0.15rem 0 0.2rem;
-  padding: 1.55rem 1.2rem 1.3rem;
-  text-align: left;
-  color: #2a4a78;
+  margin: 0.1rem 0 0.15rem;
+  padding: 1.15rem 0.7rem 0.85rem;
   background: linear-gradient(165deg, #f7f3eb 0%, var(--paper) 40%, var(--paper-deep) 100%);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.5) inset,
     0 16px 36px rgba(0, 0, 0, 0.3);
 }
 
-.bday-note p {
+.photo-frame__photo {
+  width: 100%;
+  height: auto;
+  display: none;
+  object-fit: contain;
+  object-position: center top;
+  background: #f4efe6;
+}
+
+.photo-frame.has-photo .photo-frame__photo {
+  display: block;
+}
+
+.photo-frame__placeholder {
+  min-height: 11.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem 1rem;
+  border: 1px dashed rgba(90, 82, 72, 0.28);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.photo-frame__waiting {
   font-family: var(--font-hand);
-  font-size: clamp(1.35rem, 5.4vw, 1.62rem);
-  font-weight: 600;
-  line-height: 1.32;
+  font-size: 1.45rem;
+  line-height: 1.25;
+  color: var(--ink);
+  text-align: center;
+  text-wrap: balance;
 }
 
-.bday-note p + p {
-  margin-top: 0.72rem;
+.photo-frame.has-photo .photo-frame__placeholder {
+  display: none;
 }
 
-.bday-note__sign {
-  margin-top: 1rem !important;
-}
-
-#screen-bday-note {
+#screen-bday-note,
+#screen-bday-gift,
+#screen-bday-older {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+/* Age gap — same quiet numerals as the graduation countdown */
+.age-gap {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+  width: 100%;
+  max-width: 22rem;
+}
+
+.age-unit {
+  padding: 0.9rem 0.35rem 0.75rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.age-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 8vw, 2.45rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--moon);
+  font-variant-numeric: tabular-nums;
+}
+
+.age-label {
+  margin-top: 0.4rem;
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--moon-muted);
+}
+
+.age-aside {
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  color: var(--gold-soft);
+  margin-top: -0.15rem;
+}
+
+.age-dates {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--moon-muted);
+  margin-top: -0.45rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -246,7 +314,17 @@
     font-size: clamp(1.65rem, 6.8vw, 2rem);
   }
 
-  #screen-bday-note .screen-inner {
-    gap: 0.85rem;
+  #screen-bday-note .screen-inner,
+  #screen-bday-gift .screen-inner,
+  #screen-bday-older .screen-inner {
+    gap: 0.8rem;
+  }
+
+  .photo-frame__placeholder {
+    min-height: 9.5rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.75rem, 7.5vw, 2.2rem);
   }
 }

@@ -48,22 +48,87 @@
       </div>
     </section>
 
-    <!-- ───────── Note ───────── -->
+    <!-- ───────── Note (handwritten photo drops in here) ───────── -->
     <section id="screen-bday-note" class="screen" aria-label="A birthday note" hidden>
       <div class="screen-inner screen-inner--narrow">
         <p class="eyebrow fade-up">For you</p>
         <h2 class="section-title fade-up delay-1">A note</h2>
 
-        <article class="bday-note fade-up delay-2">
+        <figure class="photo-frame fade-up delay-2">
           <span class="page-tape page-tape--tl" aria-hidden="true"></span>
           <span class="page-tape page-tape--tr" aria-hidden="true"></span>
-          <p>hey may!</p>
-          <p>happy birthday.</p>
-          <p>i hope today is a really good one. i’m so glad it’s yours.</p>
-          <p class="bday-note__sign">lots of love — ben :)</p>
-        </article>
+          <img
+            class="photo-frame__photo"
+            src="assets/images/birthday-letter.webp"
+            alt="A handwritten birthday note from Ben to May"
+            data-photo
+          />
+          <div class="photo-frame__placeholder">
+            <p class="photo-frame__waiting">your handwritten note goes here</p>
+          </div>
+        </figure>
 
-        <button type="button" class="btn btn--ghost fade-up delay-3" data-next="hub">
+        <button type="button" class="btn btn--ghost fade-up delay-3" data-next="older">
+          Continue
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ───────── How much older ───────── -->
+    <section id="screen-bday-older" class="screen" aria-label="How much older you are" hidden>
+      <div class="screen-inner">
+        <p class="eyebrow fade-up">You, then me</p>
+        <h2 class="section-title fade-up delay-1">How much older you are</h2>
+
+        <div class="age-gap fade-up delay-2" aria-label="2 years, 3 months, and 24 days">
+          <div class="age-unit">
+            <p class="age-value">2</p>
+            <p class="age-label">years</p>
+          </div>
+          <div class="age-unit">
+            <p class="age-value">3</p>
+            <p class="age-label">months</p>
+          </div>
+          <div class="age-unit">
+            <p class="age-value">24</p>
+            <p class="age-label">days</p>
+          </div>
+        </div>
+
+        <p class="age-aside fade-up delay-3">older than me.</p>
+        <p class="age-dates fade-up delay-3">10/19/03 · 2/12/06</p>
+
+        <button type="button" class="btn btn--primary fade-up delay-4" data-next="gift">
+          Continue
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ───────── Phone, after the note and the age gap ───────── -->
+    <section id="screen-bday-gift" class="screen" aria-label="A phone" hidden>
+      <div class="screen-inner screen-inner--narrow">
+        <p class="eyebrow fade-up">For you</p>
+        <h2 class="section-title fade-up delay-1">A phone</h2>
+
+        <figure class="photo-frame fade-up delay-2">
+          <span class="page-tape page-tape--tl" aria-hidden="true"></span>
+          <span class="page-tape page-tape--tr" aria-hidden="true"></span>
+          <img
+            class="photo-frame__photo"
+            src="assets/images/birthday-phone.webp"
+            alt="The phone Ben got for May"
+            data-photo
+          />
+          <div class="photo-frame__placeholder">
+            <p class="photo-frame__waiting">a photo of it goes here</p>
+          </div>
+        </figure>
+
+        <p class="age-aside fade-up delay-3">this one’s yours.</p>
+
+        <button type="button" class="btn btn--ghost fade-up delay-4" data-next="hub">
           Continue
           <span class="btn-arrow" aria-hidden="true">→</span>
         </button>
